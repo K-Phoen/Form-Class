@@ -8,10 +8,10 @@ function test($value)
     if($value == 'yooo')
         return '';
     else
-        return 'Doit être égal à « yooo »';
+        return 'Doit Ãªtre Ã©gal Ã  yooo';
 }
 
-//création du formulaire
+//crÃ©ation du formulaire
 $form = new Form();
 $form->add('Text', 'pseudo')->setLabel('Nom')->setErrorText('required', 'Je veux savoir ton nom !')->addValidationRule('test');
 $form->add('Email', 'mail')->setLabel('Adresse Mail');

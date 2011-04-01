@@ -98,8 +98,10 @@ class Form {
     {
         foreach($this->fields as $name => $field)
         {
-            if($field->getType() != 'submit')
-                $field->setValue((isset($data[$name])) ? $data[$name] : Null);
+            if($field->getType() == 'submit')
+                continue;
+            
+            $field->setValue((isset($data[$name])) ? $data[$name] : Null);
         }
     }
 
@@ -114,6 +116,9 @@ class Form {
         $valid = True;
         foreach($this->fields as $name => $field)
         {
+            if($field->isDisabled())
+                continue;
+            
             if(!$field->isValid())
             {
                 $valid = False;
@@ -486,6 +491,15 @@ abstract class FormField {
             unset($this->attrs['disabled']);
 
         return $this;
+    }
+    
+    /**
+     * Indique si le champ est désactivé
+     * 
+     * @return bool
+     */
+    public function isDisabled() {
+        return isset($this->attrs['disabled']) && $this->attrs['disabled'] == 'disabled';
     }
     
     /**
